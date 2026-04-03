@@ -1,0 +1,1311 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FY27 1.0 其他品类提升方案</title>
+<style>
+  :root {
+    --bg: #f7f8fc;
+    --surface: #ffffff;
+    --nav-bg: #111827;
+    --nav-text: #94a3b8;
+    --nav-active: #ffffff;
+    --primary: #3b82f6;
+    --primary-dark: #2563eb;
+    --accent: #6366f1;
+    --p0: #ef4444;
+    --p0-bg: #fef2f2;
+    --p1: #f59e0b;
+    --p1-bg: #fffbeb;
+    --p2: #94a3b8;
+    --p2-bg: #f8fafc;
+    --text: #1e293b;
+    --text-secondary: #64748b;
+    --text-muted: #94a3b8;
+    --border: #e2e8f0;
+    --success: #10b981;
+    --danger: #ef4444;
+    --radius: 12px;
+    --shadow-sm: 0 1px 3px rgba(0,0,0,.06);
+    --shadow-md: 0 4px 16px rgba(0,0,0,.08);
+    --shadow-lg: 0 8px 32px rgba(0,0,0,.12);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, "Noto Sans SC", sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.7;
+    font-size: 15px;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ── Sidebar Nav ── */
+  .sidebar {
+    position: fixed;
+    top: 0; left: 0;
+    width: 260px; height: 100vh;
+    background: var(--nav-bg);
+    padding: 28px 0;
+    overflow-y: auto;
+    z-index: 100;
+    display: flex;
+    flex-direction: column;
+  }
+  .sidebar::-webkit-scrollbar { width: 0; }
+
+  .logo-area {
+    padding: 0 24px 24px;
+    border-bottom: 1px solid rgba(255,255,255,.08);
+    margin-bottom: 16px;
+  }
+  .logo-area h1 {
+    font-size: 16px;
+    color: #fff;
+    font-weight: 700;
+    letter-spacing: .3px;
+  }
+  .logo-area .subtitle {
+    font-size: 12px;
+    color: var(--nav-text);
+    margin-top: 4px;
+  }
+
+  .nav-section {
+    padding: 0 16px;
+    margin-bottom: 8px;
+  }
+  .nav-section-title {
+    font-size: 11px;
+    color: rgba(255,255,255,.3);
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+    padding: 12px 8px 6px;
+    font-weight: 600;
+  }
+  .nav-link {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 9px 12px;
+    color: var(--nav-text);
+    text-decoration: none;
+    font-size: 13.5px;
+    border-radius: 8px;
+    transition: all .15s;
+    font-weight: 450;
+  }
+  .nav-link:hover {
+    background: rgba(255,255,255,.06);
+    color: var(--nav-active);
+  }
+  .nav-link.active {
+    background: rgba(59,130,246,.15);
+    color: var(--primary);
+    font-weight: 600;
+  }
+  .nav-icon {
+    width: 20px;
+    text-align: center;
+    font-size: 14px;
+    flex-shrink: 0;
+  }
+  .nav-badge {
+    margin-left: auto;
+    font-size: 10px;
+    padding: 2px 7px;
+    border-radius: 10px;
+    font-weight: 700;
+    line-height: 1.4;
+  }
+  .badge-p0 { background: var(--p0); color: #fff; }
+  .badge-p1 { background: var(--p1); color: #fff; }
+  .badge-p2 { background: rgba(255,255,255,.1); color: var(--nav-text); }
+
+  /* ── Main Content ── */
+  .main {
+    margin-left: 260px;
+    min-height: 100vh;
+  }
+
+  /* Hero */
+  .hero {
+    background: linear-gradient(135deg, #1e293b 0%, #0f172a 50%, #1e1b4b 100%);
+    color: #fff;
+    padding: 64px 56px 56px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::after {
+    content: '';
+    position: absolute;
+    top: -100px; right: -100px;
+    width: 400px; height: 400px;
+    background: radial-gradient(circle, rgba(99,102,241,.2), transparent 70%);
+    border-radius: 50%;
+  }
+  .hero-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(255,255,255,.1);
+    padding: 5px 14px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 500;
+    margin-bottom: 20px;
+    backdrop-filter: blur(10px);
+  }
+  .hero h2 {
+    font-size: 32px;
+    font-weight: 800;
+    line-height: 1.3;
+    margin-bottom: 12px;
+    letter-spacing: -.5px;
+  }
+  .hero p {
+    font-size: 16px;
+    color: rgba(255,255,255,.65);
+    max-width: 640px;
+    line-height: 1.8;
+  }
+
+  /* Content area */
+  .content {
+    padding: 40px 56px 80px;
+    max-width: 1060px;
+  }
+
+  /* Section */
+  .section {
+    margin-bottom: 56px;
+    scroll-margin-top: 24px;
+  }
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 24px;
+    padding-bottom: 16px;
+    border-bottom: 2px solid var(--border);
+  }
+  .section-num {
+    width: 36px; height: 36px;
+    background: var(--primary);
+    color: #fff;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    font-weight: 800;
+    flex-shrink: 0;
+  }
+  .section-title {
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--text);
+    letter-spacing: -.3px;
+  }
+
+  /* Cards */
+  .card {
+    background: var(--surface);
+    border-radius: var(--radius);
+    border: 1px solid var(--border);
+    padding: 28px;
+    margin-bottom: 20px;
+    box-shadow: var(--shadow-sm);
+    transition: box-shadow .2s;
+  }
+  .card:hover { box-shadow: var(--shadow-md); }
+  .card-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 18px;
+  }
+  .card-title {
+    font-size: 17px;
+    font-weight: 700;
+  }
+
+  /* Metric Row */
+  .metric-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 16px;
+    margin-bottom: 24px;
+  }
+  .metric {
+    background: var(--bg);
+    border-radius: 10px;
+    padding: 18px 20px;
+    border: 1px solid var(--border);
+  }
+  .metric-label {
+    font-size: 12px;
+    color: var(--text-muted);
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: .5px;
+    margin-bottom: 6px;
+  }
+  .metric-value {
+    font-size: 26px;
+    font-weight: 800;
+    color: var(--text);
+    line-height: 1.2;
+  }
+  .metric-sub {
+    font-size: 12px;
+    color: var(--text-secondary);
+    margin-top: 4px;
+  }
+
+  /* Executive KPI cards */
+  .kpi-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    margin: 32px 0;
+  }
+  .kpi-card {
+    background: rgba(255,255,255,.06);
+    border: 1px solid rgba(255,255,255,.1);
+    border-radius: 12px;
+    padding: 20px;
+    backdrop-filter: blur(10px);
+    text-align: center;
+  }
+  .kpi-card .kpi-num {
+    font-size: 30px;
+    font-weight: 800;
+    background: linear-gradient(135deg, #60a5fa, #a78bfa);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    line-height: 1.2;
+  }
+  .kpi-card .kpi-label {
+    font-size: 12px;
+    color: rgba(255,255,255,.5);
+    margin-top: 6px;
+    font-weight: 500;
+  }
+
+  /* Priority tag */
+  .priority {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 3px 10px;
+    border-radius: 6px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: .5px;
+  }
+  .priority-p0 { background: var(--p0-bg); color: var(--p0); }
+  .priority-p1 { background: var(--p1-bg); color: var(--p1); }
+  .priority-p2 { background: var(--p2-bg); color: var(--p2); }
+
+  /* Table */
+  .table-wrap {
+    overflow-x: auto;
+    margin: 16px 0;
+    border-radius: 10px;
+    border: 1px solid var(--border);
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13.5px;
+  }
+  thead {
+    background: #f8fafc;
+  }
+  th {
+    padding: 12px 16px;
+    text-align: left;
+    font-weight: 600;
+    color: var(--text-secondary);
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: .5px;
+    border-bottom: 1px solid var(--border);
+    white-space: nowrap;
+  }
+  td {
+    padding: 12px 16px;
+    border-bottom: 1px solid #f1f5f9;
+    color: var(--text);
+  }
+  tr:last-child td { border-bottom: none; }
+  tr:hover td { background: #fafbfe; }
+
+  /* Insight box */
+  .insight {
+    background: linear-gradient(135deg, #eff6ff, #f0f4ff);
+    border-left: 4px solid var(--primary);
+    border-radius: 0 10px 10px 0;
+    padding: 18px 22px;
+    margin: 18px 0;
+    font-size: 14px;
+    line-height: 1.8;
+    color: #1e40af;
+  }
+  .insight strong { color: #1e3a5f; }
+
+  .insight-warn {
+    background: linear-gradient(135deg, #fffbeb, #fef9e7);
+    border-left: 4px solid var(--p1);
+    color: #92400e;
+  }
+  .insight-warn strong { color: #78350f; }
+
+  .insight-danger {
+    background: linear-gradient(135deg, #fef2f2, #fff1f2);
+    border-left: 4px solid var(--p0);
+    color: #991b1b;
+  }
+  .insight-danger strong { color: #7f1d1d; }
+
+  .insight-success {
+    background: linear-gradient(135deg, #ecfdf5, #f0fdf4);
+    border-left: 4px solid var(--success);
+    color: #065f46;
+  }
+  .insight-success strong { color: #064e3b; }
+
+  /* Flow */
+  .flow {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    margin: 20px 0;
+    flex-wrap: wrap;
+  }
+  .flow-step {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 10px 18px;
+    font-size: 13px;
+    font-weight: 500;
+    white-space: nowrap;
+  }
+  .flow-arrow {
+    color: var(--text-muted);
+    font-size: 18px;
+    margin: 0 4px;
+  }
+
+  /* Two-col comparison */
+  .compare-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+  .compare-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 22px;
+  }
+  .compare-card h4 {
+    font-size: 14px;
+    font-weight: 700;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  /* Sub-section */
+  .sub-title {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--text);
+    margin: 24px 0 10px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .sub-title::before {
+    content: '';
+    width: 4px;
+    height: 16px;
+    background: var(--primary);
+    border-radius: 2px;
+    flex-shrink: 0;
+  }
+
+  /* Category section */
+  .category-hero {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 24px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--border);
+  }
+  .category-icon {
+    width: 52px; height: 52px;
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    flex-shrink: 0;
+  }
+  .category-meta {
+    flex: 1;
+  }
+  .category-name {
+    font-size: 20px;
+    font-weight: 800;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .category-desc {
+    font-size: 13px;
+    color: var(--text-secondary);
+    margin-top: 2px;
+  }
+
+  /* Timeline */
+  .timeline {
+    position: relative;
+    padding-left: 32px;
+  }
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 11px; top: 0; bottom: 0;
+    width: 2px;
+    background: var(--border);
+  }
+  .timeline-item {
+    position: relative;
+    margin-bottom: 28px;
+  }
+  .timeline-dot {
+    position: absolute;
+    left: -32px; top: 4px;
+    width: 24px; height: 24px;
+    background: var(--primary);
+    border: 3px solid var(--surface);
+    border-radius: 50%;
+    box-shadow: 0 0 0 2px var(--primary);
+  }
+  .timeline-month {
+    font-size: 16px;
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+  .timeline-content {
+    background: var(--bg);
+    border-radius: 10px;
+    padding: 16px 20px;
+    border: 1px solid var(--border);
+  }
+  .timeline-metric {
+    font-size: 13px;
+    color: var(--text-secondary);
+    margin-bottom: 10px;
+    line-height: 1.6;
+  }
+  .timeline-actions {
+    list-style: none;
+    padding: 0;
+  }
+  .timeline-actions li {
+    font-size: 13px;
+    padding: 4px 0;
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+  .timeline-actions li::before {
+    content: '\2192';
+    color: var(--primary);
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+
+  /* Footer */
+  .footer {
+    text-align: center;
+    padding: 40px 56px;
+    color: var(--text-muted);
+    font-size: 12px;
+    border-top: 1px solid var(--border);
+  }
+
+  /* Prose */
+  .prose { line-height: 1.85; color: var(--text-secondary); font-size: 14.5px; }
+  .prose + .prose { margin-top: 10px; }
+  .highlight { color: var(--primary-dark); font-weight: 600; }
+
+  /* Trend indicator */
+  .trend-up { color: var(--success); }
+  .trend-down { color: var(--danger); }
+
+  /* Tag */
+  .tag {
+    display: inline-block;
+    padding: 2px 8px;
+    font-size: 11px;
+    border-radius: 4px;
+    font-weight: 600;
+  }
+  .tag-blue { background: #dbeafe; color: #1d4ed8; }
+  .tag-green { background: #d1fae5; color: #065f46; }
+  .tag-red { background: #fee2e2; color: #991b1b; }
+  .tag-yellow { background: #fef3c7; color: #92400e; }
+
+  /* Matrix overview card */
+  .matrix-table td:first-child { font-weight: 700; }
+  .matrix-table .metric-highlight {
+    font-weight: 700;
+    color: var(--text);
+  }
+
+  /* Responsive */
+  @media (max-width: 900px) {
+    .sidebar { display: none; }
+    .main { margin-left: 0; }
+    .hero { padding: 40px 24px; }
+    .content { padding: 24px; }
+    .kpi-grid { grid-template-columns: repeat(2, 1fr); }
+    .compare-grid { grid-template-columns: 1fr; }
+  }
+
+  /* Smooth scroll */
+  html { scroll-behavior: smooth; }
+
+  /* Print */
+  @media print {
+    .sidebar { display: none; }
+    .main { margin-left: 0; }
+    .hero { background: #1e293b !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ====== Sidebar ====== -->
+<nav class="sidebar">
+  <div class="logo-area">
+    <h1>其他品类提升方案</h1>
+    <div class="subtitle">FY27 1.0 · 策略报告</div>
+  </div>
+
+  <div class="nav-section">
+    <div class="nav-section-title">概览</div>
+    <a href="#executive" class="nav-link active">
+      <span class="nav-icon">◈</span> 执行摘要
+    </a>
+    <a href="#diagnosis" class="nav-link">
+      <span class="nav-icon">◉</span> 现状诊断
+    </a>
+    <a href="#matrix" class="nav-link">
+      <span class="nav-icon">◎</span> 品类机会矩阵
+    </a>
+  </div>
+
+  <div class="nav-section">
+    <div class="nav-section-title">P0 核心品类</div>
+    <a href="#books" class="nav-link">
+      <span class="nav-icon">📖</span> 图书回收
+      <span class="nav-badge badge-p0">P0</span>
+    </a>
+    <a href="#clothing" class="nav-link">
+      <span class="nav-icon">👕</span> 旧衣回收
+      <span class="nav-badge badge-p0">P0</span>
+    </a>
+  </div>
+
+  <div class="nav-section">
+    <div class="nav-section-title">P1 增长品类</div>
+    <a href="#appliance" class="nav-link">
+      <span class="nav-icon">🏠</span> 家电回收
+      <span class="nav-badge badge-p1">P1</span>
+    </a>
+    <a href="#ski" class="nav-link">
+      <span class="nav-icon">⛷</span> 雪具回收
+      <span class="nav-badge badge-p1">P1</span>
+    </a>
+    <a href="#baijiu" class="nav-link">
+      <span class="nav-icon">🍶</span> 白酒回收
+      <span class="nav-badge badge-p1">P1</span>
+    </a>
+  </div>
+
+  <div class="nav-section">
+    <div class="nav-section-title">其他</div>
+    <a href="#maintain" class="nav-link">
+      <span class="nav-icon">◇</span> 维持观察品类
+      <span class="nav-badge badge-p2">P2</span>
+    </a>
+    <a href="#roadmap" class="nav-link">
+      <span class="nav-icon">◆</span> 行动路线图
+    </a>
+  </div>
+</nav>
+
+<!-- ====== Main ====== -->
+<main class="main">
+
+  <!-- Hero -->
+  <header class="hero" id="executive">
+    <div class="hero-label">📊 FY27 1.0 策略报告</div>
+    <h2>其他品类提升方案</h2>
+    <p>覆盖卡券、图书、旧衣、家电、奢品、黄金等品类。本报告基于行业调研与平台数据，系统性识别增长机会，明确优先级与落地路径，以扭转近两年完结单量下滑趋势。</p>
+
+    <div class="kpi-grid">
+      <div class="kpi-card">
+        <div class="kpi-num">-52%</div>
+        <div class="kpi-label">峰值至今单量降幅</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-num">5 个</div>
+        <div class="kpi-label">已识别机会品类</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-num">~475 万</div>
+        <div class="kpi-label">年佣金增收潜力</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-num">Q1</div>
+        <div class="kpi-label">首批落地周期</div>
+      </div>
+    </div>
+  </header>
+
+  <div class="content">
+
+    <!-- ===== 1. 现状诊断 ===== -->
+    <section class="section" id="diagnosis">
+      <div class="section-header">
+        <div class="section-num">1</div>
+        <h3 class="section-title">现状诊断：单量持续下滑的内外因</h3>
+      </div>
+
+      <div class="card">
+        <p class="prose">
+          其他品类完结单量从 <strong>2024年4月的峰值 5,789 单/日</strong> 下滑至 <strong>2026年4月的 2,789 单/日</strong>，降幅达 52%。期间出现两个关键拐点：2024年7月与2024年10月，分别对应平台内部调整与外部政策冲击。
+        </p>
+
+        <div class="sub-title">下滑归因分析</div>
+
+        <div class="compare-grid" style="margin-top:12px;">
+          <div class="compare-card">
+            <h4>⚙️ 内因（平台因素）</h4>
+            <p class="prose">
+              2024年8月前后，旧衣服金刚位入口下线，导致旧衣流量入口断裂，用户到达路径变长、转化率显著下降。同时，电玩品类迁移至数码频道后，原"其他品类"口径内订单减少。
+            </p>
+          </div>
+          <div class="compare-card">
+            <h4>🌐 外因（政策与市场）</h4>
+            <p class="prose">
+              <strong>话费卡：</strong>2024年3月笔单价触及近三年最低值，运营商管控趋严，福利渠道持续收缩，供给侧无反弹迹象。<br>
+              <strong>加油卡：</strong>2024年8月，油卡避税被监管部门查处，暴雷导致单量大幅下滑。两大卡券子品类同期受挫，直接拉低整体大盘。
+            </p>
+          </div>
+        </div>
+
+        <div class="insight insight-danger" style="margin-top:18px;">
+          <strong>核心判断：</strong>卡券品类受制于政策与监管的结构性压力，短期内难以恢复增长。需将增长重心转向图书、旧衣等可操作性更强的品类，通过产品升级和模式创新寻找新增量。
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 2. 品类机会矩阵 ===== -->
+    <section class="section" id="matrix">
+      <div class="section-header">
+        <div class="section-num">2</div>
+        <h3 class="section-title">品类机会矩阵：从市场空间到落地优先级</h3>
+      </div>
+
+      <div class="card">
+        <p class="prose" style="margin-bottom:16px;">
+          综合市场规模、毛利空间、落地难度和增长确定性四个维度，将五个机会品类划分为 P0（优先攻坚）和 P1（积极布局）两个梯队。下表展示各品类核心经营数据和机会判断。
+        </p>
+
+        <div class="table-wrap">
+          <table class="matrix-table">
+            <thead>
+              <tr>
+                <th>品类</th>
+                <th>优先级</th>
+                <th>当前日均单量</th>
+                <th>佣金率</th>
+                <th>笔单价</th>
+                <th>年佣金收入</th>
+                <th>服务商毛利</th>
+                <th>核心机会</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="metric-highlight">📖 图书</td>
+                <td><span class="priority priority-p0">P0</span></td>
+                <td>416 单</td>
+                <td>3%</td>
+                <td>¥30</td>
+                <td>¥15 万</td>
+                <td>~40%</td>
+                <td><span class="tag tag-green">ISBN识别提升 +50%单量</span></td>
+              </tr>
+              <tr>
+                <td class="metric-highlight">👕 旧衣</td>
+                <td><span class="priority priority-p0">P0</span></td>
+                <td>691 单</td>
+                <td>&lt;1%</td>
+                <td>积分制</td>
+                <td>¥180 万(充值)</td>
+                <td>12-58%</td>
+                <td><span class="tag tag-green">增加按件回收模式</span></td>
+              </tr>
+              <tr>
+                <td class="metric-highlight">🏠 家电</td>
+                <td><span class="priority priority-p1">P1</span></td>
+                <td>140 单</td>
+                <td>4.5%</td>
+                <td>¥44</td>
+                <td>¥60 万</td>
+                <td>品类差异大</td>
+                <td><span class="tag tag-blue">一口价模式 + 小家电新增</span></td>
+              </tr>
+              <tr>
+                <td class="metric-highlight">⛷ 雪具</td>
+                <td><span class="priority priority-p1">P1</span></td>
+                <td>新品类</td>
+                <td>待定</td>
+                <td>高客单</td>
+                <td>待验证</td>
+                <td>40%+</td>
+                <td><span class="tag tag-blue">蓝海赛道，先发优势</span></td>
+              </tr>
+              <tr>
+                <td class="metric-highlight">🍶 白酒</td>
+                <td><span class="priority priority-p1">P1</span></td>
+                <td>待启动</td>
+                <td>待定</td>
+                <td>高客单</td>
+                <td>¥200-400 万</td>
+                <td>~5%</td>
+                <td><span class="tag tag-yellow">千亿市场，方案成熟</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="insight insight-success">
+          <strong>矩阵结论：</strong>图书与旧衣作为 P0 品类，当前基础好、改进路径明确，应在 Q1 优先落地产品与运营升级。家电、雪具、白酒作为 P1 品类同步推进商务准备和方案设计，在 Q2 逐步上线。
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 3. 图书回收 ===== -->
+    <section class="section" id="books">
+      <div class="section-header">
+        <div class="section-num">3</div>
+        <h3 class="section-title">P0 品类深度分析</h3>
+      </div>
+
+      <div class="card">
+        <div class="category-hero">
+          <div class="category-icon" style="background:#dbeafe;">📖</div>
+          <div class="category-meta">
+            <div class="category-name">
+              图书回收
+              <span class="priority priority-p0">P0</span>
+            </div>
+            <div class="category-desc">短期可实现 +50% 单量增长的高确定性品类</div>
+          </div>
+        </div>
+
+        <div class="metric-row">
+          <div class="metric">
+            <div class="metric-label">当前日均单量</div>
+            <div class="metric-value">416</div>
+            <div class="metric-sub">FY26 累计佣金约 ¥15 万</div>
+          </div>
+          <div class="metric">
+            <div class="metric-label">目标增量</div>
+            <div class="metric-value" style="color:var(--success);">+200 单/日</div>
+            <div class="metric-sub">短期增幅 +50%</div>
+          </div>
+          <div class="metric">
+            <div class="metric-label">市场规模</div>
+            <div class="metric-value">65 亿</div>
+            <div class="metric-sub">旧书回收年市场规模</div>
+          </div>
+          <div class="metric">
+            <div class="metric-label">服务商毛利</div>
+            <div class="metric-value">~40%</div>
+            <div class="metric-sub">单本毛利 ¥3-20</div>
+          </div>
+        </div>
+
+        <div class="sub-title">市场与竞对</div>
+        <p class="prose">
+          旧书回收正经历从"按废品论斤卖"到"单本扫码报价"的产业升级，与五年前的旧衣行业演进路径相似。头部竞品（转转）年同比增速超过 30%，市场正处于高速增长期。图书回收的下游出口结构为：<span class="highlight">70% 面向 C 端再流通、20% 批量供给 B 端渠道、10% 进入纸浆再生</span>，价值层级分明，产业链日趋成熟。
+        </p>
+
+        <div class="sub-title">全链路流程</div>
+        <div class="flow">
+          <div class="flow-step">用户扫码</div><span class="flow-arrow">→</span>
+          <div class="flow-step">ISBN 识别报价</div><span class="flow-arrow">→</span>
+          <div class="flow-step">下单</div><span class="flow-arrow">→</span>
+          <div class="flow-step">顺丰上门取件</div><span class="flow-arrow">→</span>
+          <div class="flow-step">回仓分拣</div><span class="flow-arrow">→</span>
+          <div class="flow-step">分级流转（C/B/纸浆）</div>
+        </div>
+
+        <div class="sub-title">核心问题诊断</div>
+        <div class="insight insight-danger">
+          <strong>ISBN 覆盖率仅 80%，实际订单损失远超 20%。</strong>当用户扫描 5 本书中有 1 本无法识别时，极大概率放弃整笔订单。这意味着 20% 的未覆盖率可能导致超过 35% 的订单流失。问题根源在于：部分书籍虽然二手流通价值有限，但"回收价格 + 物流费用"仍可覆盖处理成本，完全具备收取条件，只是当前产品能力不支持。
+        </div>
+
+        <div class="sub-title">落地方案：LBS 区域仓 + ISBN 扩容</div>
+        <p class="prose">
+          <strong>产品层：</strong>增加 LBS 识别能力，将发货模式从中心仓改为区域仓。物流成本从 ¥7/单降至 ¥3/单，节省的 ¥4 可返补至报价端，提升对低价值书籍的覆盖意愿。经其他平台验证，此方案可将 ISBN 识别率从 80% 提升至 95%，估价转化率提升 50%。
+        </p>
+
+        <div class="sub-title">中期增量机会</div>
+        <p class="prose">
+          闲鱼大盘中存在大量"卖旧书难"的用户痛点：C 端自行出售一本 ¥25 的书，邮费需 ¥15，实际到手仅 ¥10。而服务商通过顺丰协议价仅需 ¥3 的物流成本。<span class="highlight">这一价差构成了回收模式相对于 C2C 自卖的核心竞争力</span>，闲鱼可通过在自卖链路中引导用户选择回收，实现增量转化。
+        </p>
+      </div>
+
+      <!-- ── 旧衣 ── -->
+      <div class="card" id="clothing" style="scroll-margin-top:24px;">
+        <div class="category-hero">
+          <div class="category-icon" style="background:#fce7f3;">👕</div>
+          <div class="category-meta">
+            <div class="category-name">
+              旧衣回收
+              <span class="priority priority-p0">P0</span>
+            </div>
+            <div class="category-desc">从"废品模式"向"品牌溢价模式"升级的关键转型</div>
+          </div>
+        </div>
+
+        <div class="metric-row">
+          <div class="metric">
+            <div class="metric-label">当前日均单量</div>
+            <div class="metric-value">691</div>
+            <div class="metric-sub">年充值收入约 ¥180 万</div>
+          </div>
+          <div class="metric">
+            <div class="metric-label">废品模式毛利</div>
+            <div class="metric-value">12%</div>
+            <div class="metric-sub">50 件衣服毛利 ¥7</div>
+          </div>
+          <div class="metric">
+            <div class="metric-label">精品模式毛利</div>
+            <div class="metric-value" style="color:var(--success);">58%</div>
+            <div class="metric-sub">50 件衣服毛利 ¥87</div>
+          </div>
+          <div class="metric">
+            <div class="metric-label">行业生存率</div>
+            <div class="metric-value">&lt;10%</div>
+            <div class="metric-sub">从 200+ 平台整合至今</div>
+          </div>
+        </div>
+
+        <div class="sub-title">行业格局</div>
+        <p class="prose">
+          旧衣回收行业已从早期的"百花齐放"（高峰期超 200 家平台）进入深度整合期，存活平台不足 10%。当前行业呈现双模式并行格局：<span class="highlight">传统废品按公斤回收</span>（低毛利、走量）与<span class="highlight">单件品牌高溢价回收</span>（高毛利、做精品）。两种模式的毛利差距高达 4.8 倍，决定了未来竞争的核心是向高价值模式升级的能力。
+        </p>
+
+        <div class="sub-title">全链路流程（按件精品模式）</div>
+        <div class="flow">
+          <div class="flow-step">用户下单</div><span class="flow-arrow">→</span>
+          <div class="flow-step">上门取件</div><span class="flow-arrow">→</span>
+          <div class="flow-step">品牌/品相鉴定</div><span class="flow-arrow">→</span>
+          <div class="flow-step">分级定价</div><span class="flow-arrow">→</span>
+          <div class="flow-step">高价值二次流通 / 低价值出口</div>
+        </div>
+
+        <div class="sub-title">核心问题诊断</div>
+        <div class="insight insight-danger">
+          <strong>闲鱼"两头不沾"——废品模式走量不够，精品模式隐藏太深。</strong>平台虽然有潮品回收能力（混在奢侈品品类中且限制型号，链路复杂），但用户几乎无法感知；而旧衣回收频道内仅提供传统废品模式，无法捕获品牌衣物的高溢价空间。对比竞品：转转实现了"旧衣分品牌 + 废品"双轨并行，爱回收将"旧衣"与"潮服"拆为两个独立品类，多抓鱼则专注高价值单品。闲鱼在定位清晰度上落后于行业水平。
+        </div>
+
+        <div class="sub-title">落地方案：旧衣频道内增加按件回收</div>
+        <p class="prose">
+          核心策略是在现有旧衣回收频道中新增"按件回收"入口，将衣服与鞋子合并运营。数据显示，品牌衣服占旧衣回收比例约 10%，平均每公斤约有 1 件品牌单品。服务商给价约为市场价的 1/3，典型报价参考：品牌短袖 ¥8、冲锋衣 ¥50、羽绒服 ¥100。<span class="highlight">这一模式能在不改变用户习惯的前提下，通过品类分层显著提升客单价和毛利。</span>
+        </p>
+
+        <div class="sub-title">长期机会</div>
+        <p class="prose">
+          结合市场营销方案，仅上半年已有多家媒体期望合作旧衣相关内容（如综艺联动），具备通过内容营销驱动品类认知和流量的条件。
+        </p>
+      </div>
+    </section>
+
+    <!-- ===== 4. P1 品类 ===== -->
+    <section class="section" id="appliance">
+      <div class="section-header">
+        <div class="section-num">4</div>
+        <h3 class="section-title">P1 品类深度分析</h3>
+      </div>
+
+      <!-- 家电 -->
+      <div class="card">
+        <div class="category-hero">
+          <div class="category-icon" style="background:#e0f2fe;">🏠</div>
+          <div class="category-meta">
+            <div class="category-name">
+              家电回收
+              <span class="priority priority-p1">P1</span>
+            </div>
+            <div class="category-desc">大家电模式迭代 + 小家电新增量的双线机会</div>
+          </div>
+        </div>
+
+        <div class="metric-row">
+          <div class="metric">
+            <div class="metric-label">当前日均单量</div>
+            <div class="metric-value">140</div>
+            <div class="metric-sub">年佣金约 ¥60 万</div>
+          </div>
+          <div class="metric">
+            <div class="metric-label">大家电全渠道规模</div>
+            <div class="metric-value">2500 万+</div>
+            <div class="metric-sub">台/年（仅京东以旧换新千万级）</div>
+          </div>
+          <div class="metric">
+            <div class="metric-label">小家电存量</div>
+            <div class="metric-value">10-15 亿</div>
+            <div class="metric-sub">台（正规回收仅 1.8 亿）</div>
+          </div>
+          <div class="metric">
+            <div class="metric-label">佣金率</div>
+            <div class="metric-value">4.5%</div>
+            <div class="metric-sub">笔单价 ¥44</div>
+          </div>
+        </div>
+
+        <div class="sub-title">市场洞察</div>
+        <p class="prose">
+          大家电回收行业正处于模式迭代与规模扩张并存的关键阶段。需求侧，用户核心诉求是<span class="highlight">快速清退旧机，处置动机强于价格考量</span>，即时性需求显著。供给侧，服务商链条存在层层转包，信息费被中间商抽成严重，终端拆解厂收益远高于用户实际到账金额。行业正从早期的"估价-议价-上门"模式（因用户虚报、取消率高而难以为继），<span class="highlight">转向一口价以旧换新和自营货场直收模式</span>。小家电则属于新兴增量市场，正规回收渠道渗透率极低，存在结构性机会。
+        </p>
+
+        <div class="sub-title">全链路与毛利</div>
+        <div class="flow" style="margin-bottom:16px;">
+          <div class="flow-step">用户下单</div><span class="flow-arrow">→</span>
+          <div class="flow-step">上门回收/寄送</div><span class="flow-arrow">→</span>
+          <div class="flow-step">检测分级</div><span class="flow-arrow">→</span>
+          <div class="flow-step">少量 2B 再销售</div><span class="flow-arrow">→</span>
+          <div class="flow-step">大部分报废拆解</div>
+        </div>
+
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>品类</th><th>利润特征</th><th>单台毛利参考</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><strong>空调（挂/柜机）</strong></td><td><span class="tag tag-green">利润最优</span></td><td>¥400-500+（二手流通空间大）</td></tr>
+              <tr><td><strong>冰箱</strong></td><td><span class="tag tag-blue">中等利润</span></td><td>¥190-250（维修后拆解）</td></tr>
+              <tr><td><strong>洗衣机</strong></td><td><span class="tag tag-yellow">有限利润</span></td><td>利润空间较低</td></tr>
+              <tr><td><strong>电视机</strong></td><td><span class="tag tag-red">几乎无利</span></td><td>~¥5（依赖规模和补贴）</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="sub-title">核心问题与落地方案</div>
+        <div class="insight insight-danger">
+          <strong>两大短板：</strong>① 大家电报价模板和价格老旧，大量型号报不出价格，且给价过低（如 80% 冰箱完结价仅 ¥60）；② 闲鱼完全没有在收小家电，错失新兴增量市场。
+        </div>
+        <p class="prose">
+          <strong>大电一口价模式重构：</strong>现有模式下拆解厂给价 ¥160，中间商拿 ¥100，消费者仅得 ¥60，且区域承包覆盖范围受限。新方案采用"物流公司（德邦+顺丰）+ 具备拆解能力的服务商"直连模式：消费者拿 ¥80，物流 ¥50，服务商 ¥30。<span class="highlight">去中间化后消费者到手价提升 33%，同时扩大覆盖范围。</span>
+        </p>
+      </div>
+
+      <!-- 雪具 -->
+      <div class="card" id="ski" style="scroll-margin-top:24px;">
+        <div class="category-hero">
+          <div class="category-icon" style="background:#ede9fe;">⛷</div>
+          <div class="category-meta">
+            <div class="category-name">
+              雪具回收
+              <span class="priority priority-p1">P1</span>
+            </div>
+            <div class="category-desc">"小而美"的蓝海赛道，先发可建护城河</div>
+          </div>
+        </div>
+
+        <div class="metric-row">
+          <div class="metric">
+            <div class="metric-label">服务商毛利</div>
+            <div class="metric-value" style="color:var(--success);">40%+</div>
+            <div class="metric-sub">高客单、高毛利</div>
+          </div>
+          <div class="metric">
+            <div class="metric-label">竞争格局</div>
+            <div class="metric-value">未固化</div>
+            <div class="metric-sub">转转刚起步，规模不大</div>
+          </div>
+          <div class="metric">
+            <div class="metric-label">履约难度</div>
+            <div class="metric-value">低</div>
+            <div class="metric-sub">复用数码上门服务商</div>
+          </div>
+          <div class="metric">
+            <div class="metric-label">用户画像</div>
+            <div class="metric-value">高契合</div>
+            <div class="metric-sub">兴趣品类，符合闲鱼调性</div>
+          </div>
+        </div>
+
+        <div class="sub-title">市场与机会</div>
+        <p class="prose">
+          雪具回收是一个"小而美"的蓝海赛道——市场天花板不算极高，但毛利空间可观、竞争格局尚未固化。目前转转刚涉足此品类，规模不大，<span class="highlight">早期进入者有机会建立品牌认知和服务标准，形成品类护城河。</span>
+        </p>
+
+        <div class="sub-title">全链路参考（转转模式）</div>
+        <div class="flow">
+          <div class="flow-step">按品牌&amp;型号估价</div><span class="flow-arrow">→</span>
+          <div class="flow-step">工程师上门拍照</div><span class="flow-arrow">→</span>
+          <div class="flow-step">服务商后台看图给价</div><span class="flow-arrow">→</span>
+          <div class="flow-step">成交后顺丰寄送</div><span class="flow-arrow">→</span>
+          <div class="flow-step">服务商收货</div>
+        </div>
+
+        <div class="sub-title">落地优势与风险</div>
+        <div class="compare-grid">
+          <div class="compare-card">
+            <h4><span style="color:var(--success);">✔</span> 落地优势</h4>
+            <p class="prose">可复用现有数码品类的上门服务商拍照履约，无额外门槛。属于兴趣品类，营销传播性强，契合闲鱼年轻用户画像，具备社区话题潜力。</p>
+          </div>
+          <div class="compare-card">
+            <h4><span style="color:var(--danger);">⚠</span> 风险提示</h4>
+            <p class="prose">季节性波动显著——雪具需求集中在秋冬季，春夏季单量可能大幅回落。需在运营节奏上提前规划淡旺季策略。</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- 白酒 -->
+      <div class="card" id="baijiu" style="scroll-margin-top:24px;">
+        <div class="category-hero">
+          <div class="category-icon" style="background:#fef3c7;">🍶</div>
+          <div class="category-meta">
+            <div class="category-name">
+              白酒（老酒）回收
+              <span class="priority priority-p1">P1</span>
+            </div>
+            <div class="category-desc">千亿级市场，方案成熟，需把控服务商风险</div>
+          </div>
+        </div>
+
+        <div class="metric-row">
+          <div class="metric">
+            <div class="metric-label">市场规模（线上）</div>
+            <div class="metric-value">1400 亿</div>
+            <div class="metric-sub">含线下总规模 3000-4000 亿</div>
+          </div>
+          <div class="metric">
+            <div class="metric-label">行业平均毛利</div>
+            <div class="metric-value">~5%</div>
+            <div class="metric-sub">部分情况低至 4%</div>
+          </div>
+          <div class="metric">
+            <div class="metric-label">预期年佣金</div>
+            <div class="metric-value">200-400 万</div>
+            <div class="metric-sub">按日均 200 单测算（偏乐观）</div>
+          </div>
+          <div class="metric">
+            <div class="metric-label">服务商准备度</div>
+            <div class="metric-value">已就绪</div>
+            <div class="metric-sub">方案成熟，前期已完成对接</div>
+          </div>
+        </div>
+
+        <div class="sub-title">全链路</div>
+        <div class="flow">
+          <div class="flow-step">用户下单</div><span class="flow-arrow">→</span>
+          <div class="flow-step">区域服务商上门/到店</div><span class="flow-arrow">→</span>
+          <div class="flow-step">鉴定师现场鉴定</div><span class="flow-arrow">→</span>
+          <div class="flow-step">现场成交</div>
+        </div>
+
+        <div class="sub-title">机会与风险</div>
+        <div class="compare-grid">
+          <div class="compare-card">
+            <h4><span style="color:var(--success);">✔</span> 机会</h4>
+            <p class="prose">市场体量大，爱回收与转转均已布局并形成一定规模，验证了市场可行性。服务商方案成熟，前期已完成对接准备，上线速度快。</p>
+          </div>
+          <div class="compare-card">
+            <h4><span style="color:var(--danger);">⚠</span> 风险</h4>
+            <p class="prose">服务商存在转包下游区域服务商的情况，可能导致服务质量不可控和用户体验波动。需建立服务商分级和质量监控机制。</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 5. 维持观察品类 ===== -->
+    <section class="section" id="maintain">
+      <div class="section-header">
+        <div class="section-num">5</div>
+        <h3 class="section-title">维持观察品类</h3>
+      </div>
+
+      <div class="card">
+        <p class="prose" style="margin-bottom:16px;">以下品类当前或因政策限制、或因调研未完成，暂列为维持/观察状态。</p>
+
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>品类</th><th>当前状态</th><th>日均单量</th><th>年佣金</th><th>关键判断</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>🎫 卡券</strong></td>
+                <td><span class="tag tag-yellow">维持现状</span></td>
+                <td>1,693 单</td>
+                <td>~¥200 万</td>
+                <td>话费卡、油卡均受政策冲击衰减，电商卡受企业福利缩减和反腐加强影响，供给端持续收缩。暂维持，不加码。</td>
+              </tr>
+              <tr>
+                <td><strong>🥇 黄金</strong></td>
+                <td><span class="tag tag-blue">调研中</span></td>
+                <td>-</td>
+                <td>-</td>
+                <td>待详细摸底后总结汇报。</td>
+              </tr>
+              <tr>
+                <td><strong>💎 奢品</strong></td>
+                <td><span class="tag tag-blue">方案待定</span></td>
+                <td>-</td>
+                <td>-</td>
+                <td>已有简单方案，待进一步确认。</td>
+              </tr>
+              <tr>
+                <td><strong>🎱 台球</strong></td>
+                <td><span class="tag tag-blue">调研中</span></td>
+                <td>-</td>
+                <td>-</td>
+                <td>台球杆回收行业分析已完成，方案待定。</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 6. 行动路线图 ===== -->
+    <section class="section" id="roadmap">
+      <div class="section-header">
+        <div class="section-num">6</div>
+        <h3 class="section-title">Q1 行动路线图（4-6 月）</h3>
+      </div>
+
+      <div class="card">
+        <div class="sub-title">营销节奏策略</div>
+        <p class="prose" style="margin-bottom:20px;">
+          结合各品类的季节性爆发系数，在 Q1 穿插营销活动重点打两个方向：<span class="highlight">旧衣回收（4月活动提升 11.4%）</span>和<span class="highlight">图书回收（6月毕业季 1.8 倍爆发）</span>。营销活动预计可将 Q1 整体下滑幅度从 -26% 收窄至 -10.8%，减缓衰退速度约 15 个百分点。
+        </p>
+
+        <div class="timeline">
+          <!-- 4月 -->
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-month">4 月</div>
+            <div class="timeline-content">
+              <div class="timeline-metric">
+                <strong>目标：</strong>日均完结 2,810 单（同比 -24.9%，下滑收窄 1.2pp）
+              </div>
+              <ul class="timeline-actions">
+                <li>旧衣回收增加 3 场活动，日均拉动 +43 单</li>
+                <li>图书回收启动 ISBN 识别 + LBS 区域仓改造</li>
+                <li>大件回收与天猫以旧换新启动对接</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- 5月 -->
+          <div class="timeline-item">
+            <div class="timeline-dot" style="background:var(--accent);box-shadow:0 0 0 2px var(--accent);"></div>
+            <div class="timeline-month">5 月</div>
+            <div class="timeline-content">
+              <div class="timeline-metric">
+                <strong>目标：</strong>日均完结 2,794 单（同比 -20.2%，下滑收窄 3.8pp）
+              </div>
+              <ul class="timeline-actions">
+                <li>旧衣回收延续 3 场活动节奏，日均 +43 单</li>
+                <li>图书回收改造完成上线，预期日均 +79 单</li>
+                <li>大件回收天猫对接完成，预期 +7 单</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- 6月 -->
+          <div class="timeline-item">
+            <div class="timeline-dot" style="background:var(--success);box-shadow:0 0 0 2px var(--success);"></div>
+            <div class="timeline-month">6 月</div>
+            <div class="timeline-content">
+              <div class="timeline-metric">
+                <strong>目标：</strong>日均完结 3,219 单（同比 -10.8%，下滑收窄 4.5pp）<br>
+                <span style="color:var(--success);font-weight:600;">预计 Q1 最佳月份，毕业季 + 618 双重利好。</span>
+              </div>
+              <ul class="timeline-actions">
+                <li>旧衣回收 3 场活动 + 新增按件回收上线，日均 +103 单</li>
+                <li>图书回收结合 618 大促活动，预期日均 +150 单</li>
+                <li>大件回收天猫对接稳定运行，+7 单</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="insight insight-success" style="margin-top:24px;">
+          <strong>Q1 总结目标：</strong>通过 P0 品类产品升级（图书 ISBN 扩容、旧衣按件回收）与运营活动（旧衣月度 3 场活动、图书毕业季营销）双管齐下，将日均完结单量从 4 月的 2,810 单提升至 6 月的 3,219 单，环比增长 14.6%，同时将同比下滑幅度从 -26% 收窄至 -10.8%。
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <p>FY27 1.0 其他品类提升方案 · 内部策略报告 · 更新于 2026 年 4 月</p>
+    </footer>
+
+  </div>
+</main>
+
+<!-- Sidebar active state -->
+<script>
+  (function() {
+    const links = document.querySelectorAll('.nav-link');
+    const sections = [];
+    links.forEach(link => {
+      const href = link.getAttribute('href');
+      if (href && href.startsWith('#')) {
+        const el = document.getElementById(href.slice(1));
+        if (el) sections.push({ link, el });
+      }
+    });
+
+    function updateActive() {
+      let current = sections[0];
+      for (const s of sections) {
+        if (s.el.getBoundingClientRect().top <= 80) current = s;
+      }
+      links.forEach(l => l.classList.remove('active'));
+      if (current) current.link.classList.add('active');
+    }
+
+    window.addEventListener('scroll', updateActive, { passive: true });
+    updateActive();
+  })();
+</script>
+
+</body>
+</html>
